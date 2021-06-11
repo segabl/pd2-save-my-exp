@@ -10,8 +10,13 @@ end
 if RequiredScript == "lib/managers/experiencemanager" then
 
 	Hooks:PostHook(ExperienceManager, "mission_xp_award", "mission_xp_award_save_my_exp", function (self)
+		local current_exp = self._global.mission_xp_current
+		if not current_exp then
+			return
+		end
+
 		Global.save_my_exp.t = managers.game_play_central:get_heist_timer()
-		Global.save_my_exp.data = table.pack(self._global.mission_xp_current:byte(1, self._global.mission_xp_current:len()))
+		Global.save_my_exp.data = table.pack(current_exp:byte(1, current_exp:len()))
 		io.save_as_json(Global.save_my_exp, data_file)
 
 		log("[SaveMyExp] Mission EXP awarded")
