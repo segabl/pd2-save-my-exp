@@ -16,7 +16,7 @@ if RequiredScript == "lib/managers/experiencemanager" then
 		end
 
 		Global.save_my_exp.t = managers.game_play_central:get_heist_timer()
-		Global.save_my_exp.data = table.pack(current_exp:byte(1, current_exp:len()))
+		Global.save_my_exp.data = { current_exp:byte(1, current_exp:len()) }
 		io.save_as_json(Global.save_my_exp, data_file)
 
 		log("[SaveMyExp] Mission EXP awarded")
