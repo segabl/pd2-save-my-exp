@@ -19,7 +19,7 @@ if RequiredScript == "lib/managers/experiencemanager" then
 		Global.save_my_exp.data = { current_exp:byte(1, current_exp:len()) }
 		io.save_as_json(Global.save_my_exp, data_file)
 
-		log("[SaveMyExp] Mission EXP awarded")
+		BLT:Log(LogLevel.INFO, "[SaveMyExp] Mission EXP awarded")
 	end)
 
 	Hooks:PostHook(ExperienceManager, "mission_xp_process", "mission_xp_process_save_my_exp", function ()
@@ -28,7 +28,7 @@ if RequiredScript == "lib/managers/experiencemanager" then
 			os.remove(data_file)
 		end
 
-		log("[SaveMyExp] Mission EXP processed")
+		BLT:Log(LogLevel.INFO, "[SaveMyExp] Mission EXP processed")
 	end)
 
 elseif RequiredScript == "lib/managers/gameplaycentralmanager" then
@@ -43,14 +43,14 @@ elseif RequiredScript == "lib/managers/gameplaycentralmanager" then
 				managers.experience:mission_xp_award(exp)
 				self._restored_exp = true
 
-				log("[SaveMyExp] Restored " .. tostring(exp) .. " previously earned EXP")
+				BLT:Log(LogLevel.INFO, "[SaveMyExp] Restored " .. tostring(exp) .. " previously earned EXP")
 			else
 				Global.save_my_exp = {}
 				if io.file_is_readable(data_file) then
 					os.remove(data_file)
 				end
 
-				log("[SaveMyExp] Cleared non matching EXP data")
+				BLT:Log(LogLevel.INFO, "[SaveMyExp] Cleared non matching EXP data")
 			end
 		end
 
