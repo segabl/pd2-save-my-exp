@@ -35,7 +35,7 @@ elseif RequiredScript == "lib/managers/gameplaycentralmanager" then
 
 	Hooks:PostHook(GamePlayCentralManager, "load", "load_save_my_exp", function (self)
 		local host = managers.network:session():peer(1):rpc():ip_at_index(0)
-		local id = host .. "_" .. managers.job:current_job_id() .. "_" .. managers.job:current_level_id() .. "_" .. Global.game_settings.difficulty
+		local id = host .. "_" .. tostring(managers.job:current_job_id()) .. "_" .. tostring(managers.job:current_level_id()) .. "_" .. Global.game_settings.difficulty
 
 		if not self._restored_exp and Global.save_my_exp.data then
 			if Global.save_my_exp.id == id and Global.save_my_exp.t and self:get_heist_timer() > Global.save_my_exp.t then
